@@ -2,6 +2,7 @@ require 'rubygems'
 require 'activerecord'
 require 'rake'
 require 'ftools'
+require 'vendor/akismetor'
 
 CONFIG = YAML.load_file( File.join(File.dirname(__FILE__), 'config', 'config.yml') ) unless defined? CONFIG
 
