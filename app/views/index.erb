@@ -1,13 +1,18 @@
-<h1>All posts <small>(<%= @posts.size %>)</small></h1>
+	<div id="container">
+		<div id="content">
+<div class="big-title" href="/" title="<%= CONFIG['blog']['title'] %>" rel="home"><%= CONFIG['blog']['title'] %></a></div>
 
-<ul class="posts">
 <% @posts.each do |post| %>
-<li>
-  <small><%= human_date post.published_on %> &mdash;</small>
-  <strong><a href="/<%= post.id %>.html"><%= post.title %></a></strong>
-  <span class="perex"><%= post.perex %></span>
-  <span><%= post.comments.size %> comments</span>
-</li>
-<% end %>
-</ul>
+			<div id="post-<%= post.id %>" class="">
+				<div class="entry-content">
+<%= post.perex %>
+				</div>
+				<div class="entry-meta2">
+					<abbr class="published"><%= human_date post.published_on %></abbr>, <a href="/<%= post.id %>.html" title="<%= h(post.title) %>" rel="bookmark"><%= h(post.title) %></a>
+				</div>
+			</div><!-- .post -->
 
+<% end %>
+
+		</div><!-- #content -->
+	</div><!-- #container -->

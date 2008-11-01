@@ -1,20 +1,17 @@
-<h2><a href="/">&laquo; Index</a></h2>
+	<div id="container">
+		<div id="content">
+		
+			<div id="post-<%= @post.id %>" class="">
+				<h2 class="entry-title"><%= h(@post.title) %></h2>
+				<div class="entry-content">
+<%= @post.body_html %>
+				</div>
+				<div class="entry-meta">
+					This entry was posted on <abbr class="published"><%= human_date(@post.published_on) %></abbr>. Bookmark the <a href="/<%= @post.id %>.html" title="Permalink to <%= h(@post.title) %>" rel="bookmark">permalink</a>. Follow any comments here with the <a href="http://<%= hostname %>/<%= @post.id %>/feed" title="Comments RSS to <%= @post.title %>" rel="alternate" type="application/rss+xml">RSS feed for this post</a>.
+					<span class="author vcard"><%= CONFIG['blog']['author'] %></span>'
+				</div>
+			</div><!-- .post -->
 
-<div id="article">
-
-  <div class="post">
-  <h1>
-    <%=h @post.title %>
-    <span class="meta">
-      <%= human_date @post.published_on %> 
-      <a href="#comments"><%= @post.comments.size %>&nbsp;comments</a>&nbsp;<a href="http://<%= hostname %>/<%= @post.id %>/feed" class="image">[Feed]</a>
-    </span>
-  </h1>
-  
-  <div class="body">
-    <%= @post.body_html %>
-  </div><!-- /body -->
-  
   <div id="comments">
     
     <% @post.comments.each_with_index do |comment, index| %>
@@ -39,7 +36,7 @@
 
       <h3>Add Comment</h3>
 
-      <form action="/<%= @post.id %>/comments#add_comment" method="post" accept-charset="utf-8">
+      <form action="/<%= @post.id %>/comments#add_comment" id="commentform" method="post" accept-charset="utf-8">
 
         <label class="required">Your name:</label>
         <input type="text" class="text" name="author" value="" id="author" />
@@ -57,7 +54,7 @@
         <br />
 
         <label>Message:</label>
-        <textarea name="body" rows="8" cols="40"></textarea>
+        <textarea name="body" id="comment" rows="8" cols="40"></textarea>
         <% if @comment and @comment.errors %><span class="error">Message <%= @comment.errors.on(:body).first if @comment %></span><% end %>
         <span>(Use Markdown syntax)</span>
         <br />
@@ -70,4 +67,5 @@
 
   </div><!-- /comments -->
 
-</div><!-- /article -->
+	</div><!-- #content -->
+</div><!-- #container -->

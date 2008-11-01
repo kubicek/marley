@@ -9,14 +9,41 @@
 
   <link rel="stylesheet" href="/stylesheets/master.css" type="text/css" media="screen" />
   <script src="/javascripts/application.js" type="text/javascript" charset="utf-8"></script>
+
+  <!-- *Syndicate* -->
+  <link href="http://<%= hostname %>/feed" rel="alternate" title="Feed for <%= h(CONFIG['blog']['title']) %>" type="application/atom+xml" />
+  <% if @post %>
+  <link href="http://<%= hostname %>/<%= @post.id %>/feed" rel="alternate" title="Feed for comments on article &ldquo;<%= h(@post.title) %>&rdquo; <%= h(CONFIG['blog']['name']) %>" type="application/atom+xml" />
+  <% end %>
 	
 </head>
 
 <body>
+  <div id="wrapper" class="hfeed">
 
-  <div class="container">
+  	<div id="header">
+  		<h1 id="blog-title">This is <a href="/" rel="home"><%= CONFIG['blog']['title'] %></a>. <%= CONFIG['blog']['description'] %></h1>
+
+    </div><!--  #header -->
+
   <%= yield %>
-  </div><!-- /container -->
+
+  <div id="secondary" class="sidebar">
+    <ul>
+			<li id="rss-links">
+				<h3>RSS Feeds</h3>
+				<ul>
+					<li><a href="http://<%= hostname %>/feed" title="" rel="alternate" type="application/rss+xml">All posts</a></li>
+          <!-- <li><a href="" title="" rel="alternate" type="application/rss+xml">All comments</a></li> -->
+				</ul>
+			</li>
+		</ul>
+	</div><!-- #secondary .sidebar -->
+
+</div><!-- #wrapper .hfeed -->
+
+</body>
+</html>
 
   <% if CONFIG['ga_code'] && Sinatra.env == :production %>
   <script type="text/javascript">
